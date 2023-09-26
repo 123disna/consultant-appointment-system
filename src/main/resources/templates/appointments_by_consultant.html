@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymleaf.org ">
+<head>
+  <meta charset="UTF-8">
+  <title>Appointment System</title>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+  <style>
+
+    .custom-heading-color {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">Appointment System</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <h1 class="custom-heading-color">Consultants Performance</h1>
+    </div>
+  </div>
+  <table class="table table-striped table-bordered">
+    <thead class="table-dark">
+    <tr>
+      <th>Consultant Id</th>
+      <th>Total Appointment</th>
+      <th>Consultant Name</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="count : ${appointmentCounts}">
+      <td th:text="${count.consultantId}"></td>
+      <td th:text="${count.appointmentCount}"></td>
+      <td th:text="${count.consultant_name}"></td>
+      <td><a th:href="@{/save-less-performance/{id}(id=${count.consultantId})}"
+                  class="btn btn-primary">Performance</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+

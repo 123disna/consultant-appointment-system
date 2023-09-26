@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Appointment System</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+<body style="background-image:url('https://tse3.mm.bing.net/th?id=OIP.Hkxc0vvNivfJnDd8Ho5U4gHaEK&pid=Api&P=0&h=180'); background-size:cover;">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">Appointment System</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <!--<a class="nav-link" th:href="@{/flower/all}">Flowers</a>-->
+      </li>
+    </ul>
+  </div>
+</nav>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card" style="padding:0px; background-color:#00000099;">
+      <h1 class="text-center" style="color:white;">User Profile</h1>
+      <div class="card-body" >
+        <form th:action="@{/add-consultant}" th:object="${consultant}" >
+          <div class="form-group">
+            <label style="color:white;">Consultant Name</label>
+            <input
+                    type="text"
+                    name="name"
+                    th:field="*{name}"
+                    class="form-control"
+                    placeholder="Enter Seeker Name"/>
+          </div>
+          <div class="form-group">
+            <label style="color:white;">Country</label>
+            <input
+                    type="text"
+                    name="specializationCountry"
+                    th:field="*{specializationCountry}"
+                    class="form-control"
+                    placeholder="Enter Specialized Country"/>
+          </div>
+          <div class="form-group">
+            <label style="color:white;">Availability</label>
+            <div id="availability-fields">
+              <div th:each="dateTime, iterStat : *{availability}">
+                <input type="datetime-local" th:field="*{availability[__${iterStat.index}__]}" required><br>
+              </div>
+            </div>
+            <button type="button" onclick="addAvailabilityField()">Add Availability</button><br><br>
+          </div>
+        </form>
+        <!--<script>
+                 function addAvailabilityField() {
+                         const availabilityFields = document.getElementById("availability-fields");
+                         const newField = document.createElement("div");
+                         const index = availabilityFields.children.length; // Get the current number of fields
+                         const inputField = document.createElement("input");
+                         inputField.type = "datetime-local";
+                         inputField.name = "availability[" + index + "]";
+                         inputField.required = true;
+
+                   // Get the current date and time in the correct format
+                        const now = new Date();
+                        const year = now.getFullYear();
+                        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+                        const day = now.getDate().toString().padStart(2, '0');
+                        const hours = now.getHours().toString().padStart(2, '0');
+                        const minutes = now.getMinutes().toString().padStart(2, '0');
+
+                   // Set the default value to the formatted date-time string
+                        inputField.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+
+                       newField.appendChild(inputField);
+                       availabilityFields.appendChild(newField);
+          }
+      </script>-->
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

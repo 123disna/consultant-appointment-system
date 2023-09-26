@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Appointment System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial;
+            font-size: 17px;
+        }
+
+        #myVideo {
+            position: fixed;
+            top: -2;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .content {
+            position: absolute;
+            top: 60%;
+            left: 45%;
+            transform: translate(-50%, -50%);
+            background: rgba(16, 32, 64, 0.9); /* Adjusted dark blue color */
+            text-align: center;
+            color: #f1f1f1;
+            padding: 10px;
+        }
+        .sec8{
+			     display:grid;
+                 background-color:black;
+                 height:400px;
+				 grid-template-columns:300px 300px 300px;
+				 column-gap:20px;
+				 justify-content:space-evenly;
+              }
+			  .ele{
+				  height:200px;
+				  margin-top:100px;
+				   }
+             .ele img{
+				height:70px;
+				width:70px;
+				border-radius:50%;
+				margin-left:110px;
+             }
+              .topic{
+                 font-size:25px;
+                 color:#2a9df4;
+                 font-weight:bold;
+				 text-align:center;
+               }
+             .des2{
+                 font-size:20px;
+                 text-align:center;
+				 margin-top:20px;
+				 line-height:30px;
+				 color:white;
+                 }
+    </style>
+</head>
+<body style="background-image:url('https://static.vecteezy.com/system/resources/previews/002/071/467/large_2x/abstract-elegant-blue-wave-shape-with-gold-stripes-on-dark-blue-background-vector.jpg'); background-size:cover;">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark" style="z-index:10;">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Home</a>
+
+    <!-- Toggler/collapsible Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/new-seeker}">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/login}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/all-consultant/def}">Consultant</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/login}">Admin</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<video autoplay muted loop id="myVideo">
+    <source src="/job.mp4" type="video/mp4">
+</video>
+<div class="content">
+    <p style="font-size:92px; font-weight:bold; color:#fff; width:100%; text-align: center; margin-bottom:-10px;">JobSage</p>
+    <p style="font-size:18px; color:#fff; letter-spacing:7px; margin-top:-20px; margin-left:15px;">Streamlined Job Guidance</p>
+</div>
+<section class="about-us" style="background-color: #ffffff; padding: 40px; margin-top: 530px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 style="color: blue; ">About Us</h2>
+                <p>Welcome to JobsAge! We are your trusted partner in the quest for international career opportunities.</p>
+                <p>At JobSage, we are dedicated to helping job seekers find their dream careers. Our team of experienced consultants is committed to providing you with the guidance and support you need to succeed in your professional journey.</p>
+                <p>With a global network of experts and resources, we connect you with opportunities around the world and ensure a smooth transition to your new job. Your success is our success, and we're here to help you every step of the way.</p>
+            </div>
+            <div class="col-md-6">
+                <img src="https://5.imimg.com/data5/SELLER/Default/2023/1/UJ/OV/DY/163253845/job-seeker-database-500x500.jpg" alt="About Us Image" width="100%">
+            </div>
+        </div>
+    </div>
+</section>
+<div class="sec8">
+    <div class="ele">
+        <img src="facebook.jpg">
+        <p class="topic">Facebook</p>
+        <p class="des2">JobSage.com<br>California City 10028</p>
+    </div>
+    <div class="ele">
+        <img src="whatsapp.png">
+        <p class="topic">WhatsApp</p>
+        <p class="des2">+34-789-567<br>+56-789-567-345</p>
+    </div>
+    <div class="ele">
+        <img src="twitter.png">
+        <p class="topic">Twitter</p>
+        <p class="des2">Career Updates<br>Networking Hub</p>
+    </div>
+</div>
+</body>
+</html>

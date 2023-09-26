@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Appointment System</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+<body style="background-image:url('https://tse3.mm.bing.net/th?id=OIP.Hkxc0vvNivfJnDd8Ho5U4gHaEK&pid=Api&P=0&h=180'); background-size:cover;">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">Appointment System</a>
+
+  <!-- Toggler/collapsible Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <!--<a class="nav-link" th:href="@{/flower/all}">Flowers</a>-->
+      </li>
+    </ul>
+  </div>
+</nav>
+<br>
+<!-- ... (existing code) ... -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card" style="padding:0px; background-color:#00000099;">
+      <h1 class="text-center" style="color:white;">User Profile</h1>
+      <div class="card-body">
+        <form th:action="@{/save-appointment}" th:object="${appointmentRequestDTO}" method="post">
+          <div class="form-group">
+            <label style="color:white;">Consultant Name</label>
+            <input
+                    type="text"
+                    th:value="${consultant.name}"
+                    class="form-control"
+                    disabled/>
+          </div>
+          <div class="form-group">
+            <label style="color:white;">Country</label>
+            <input
+                    type="text"
+                    th:value="${consultant.specializationCountry}"
+                    class="form-control"
+                    disabled/>
+          </div>
+          <div class="form-group">
+            <label style="color:white;">Available Times</label>
+            <select name="appointmentsTime" class="form-control" required>
+              <option th:each="time : ${consultant.availability}"
+                      th:value="${time}" th:text="${time}"></option>
+            </select>
+          </div>
+
+          <input type="hidden" name="consultant" id="consultant" th:value="${consultant.consultant_id}"/>
+          <button onclick="submitAppointmentForm()" class="btn btn-secondary">Appointment</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ... (previous code) ... -->
+
+<script type="text/javascript">
+    function submitAppointmentForm() {
+    console.log("submitAppointmentForm called");
+
+    var appointmentsTime = document.querySelector("select[name='appointmentsTime']").value;
+    console.log("appointmentsTime: " + appointmentsTime);
+
+    var consultant = document.getElementById("consultant").value;
+    console.log("consultantId: " + consultant);
+
+    if (appointmentsTime.trim() === "") {
+        alert("Please select a valid appointment time.");
+        return;
+    }
+
+    var data = {
+        appointmentsTime: appointmentsTime,
+        consultantId: consultant, // Pass the consultant's ID
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "/save-appointment",
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            // Handle success (e.g., show a success message to the user)
+
+            // Remove the selected appointment time from the dropdown
+            $("select[name='appointmentsTime'] option[value='" + appointmentsTime + "']").remove();
+        },
+        error: function (xhr, status, error) {
+            // Handle error (e.g., show an error message)
+        }
+    });
+}
+</script>
+</body>
+</html>
